@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #example1 {
+            /*border: 0.5px solid black;*/
+            padding: 25px;
+            background: url(img1.webp);
+            background-repeat: no-repeat;
+            background-size: auto;
+        }
+
+        #myDIV {
+            width: 2000px;
+            height: 200px;
+            -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+        }
+
+        /* Standard syntax */
+        @keyframes mymove {
+            from {
+                background-image: url('pictf/pic18.jpg');
+            }
+
+            to {
+                background-image: url('pictf/pic14.JPG');
+            }
+
+            from {
+                background-image: url('pictf/pic18.jpg');
+            }
+
+            to {
+                background-image: url('pictf/pic14.JPG');
+            }
+
+            from {
+                background-image: url('pictf/pic14.JPG');
+            }
+
+            to {
+                background-image: url('pictf/pic7.JPG');
+            }
+
+            from {
+                background-image: url('pictf/pic14.JPG');
+            }
+
+            to {
+                background-image: url('pictf/pic7.JPG');
+            }
+        }
+      
+     
+    </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    
+    <div id="example1" class="w3-container w3-black">
+        <img src="data:text/plain;base64,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" width="200" />
+        <label style="font-family:'Brush Script MT';color:white; font-size:xx-large">   idigital</label>
+
+
+        <br />
+        <a href="View products.html" style="direction:ltr">View products.html</a>
+        <a href="דף ניהול מלאי.html">Product Management</a>
+
+        <a href="Settings.html" id="settings">Settings</a>
+    </div>
+    <br /><br />
+    <!--<div id="#background_id ">
+
+    </div>-->
+   
+    <label style="font-size:larger">wellcome to:</label>
+    <input type="text" id="txt1" />
+    <br /><br />
+    <label style="font-size:larger">input your password:</label>
+    <input type="password" id="pass" />
+    <br /><br />
+    <label style="font-size:larger">save password</label>
+    <input type="checkbox" id="btn" />
+    <br /><br />
+    <input type="button" value="confirm" id="save1" onclick="save()" />
+    <div id="myDIV"></div>
+    <script>
+
+        function save() {
+            sessionStorage.setItem("text", txt1.value);
+            if (btn.checked == true) {
+                localStorage.setItem("pass_" + txt1.value, pass.value);
+
+            }
+
+        }
+
+
+
+    </script>
+</body>
+</html>
