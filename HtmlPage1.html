@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #myDIV {
+            width: 2000px;
+            height: 200px;
+            -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+        }
+
+        /* Standard syntax */
+        @keyframes mymove {
+            from {
+                background-image: url('pictf/pic1.JPG');
+            }
+
+            to {
+                background-image: url('pictf/pic12.JPG');
+            }
+
+            from {
+                background-image: url('pictf/pic1.JPG');
+            }
+
+            to {
+                background-image: url('pictf/pic12.JPG');
+            }
+
+            from {
+                background-image: url('pictf/pic4.jpg');
+            }
+
+            to {
+                background-image: url('pictf/pic7.JPG');
+            }
+
+            from {
+                background-image: url('pictf/pic4.jpg');
+            }
+
+            to {
+                background-image: url('pictf/pic7.JPG');
+            }
+        }
+
+        #background_id {
+            background-image: url(css3_star.png), url(background.png);
+            background-position: top left, center;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 220px 120px, 1200px 600px;
+            width: 600px;
+            height: 600px;
+        }
+
+        #example1 {
+            border: 0.5px solid black;
+            padding: 25px;
+            background: url(img3.jpg);
+            background-repeat: no-repeat;
+            background-size: auto;
+        }
+
+        #example2 {
+            border: 2px solid black;
+            padding: 25px;
+            background: url(img3.jpg);
+            background-repeat: no-repeat;
+            background-size: 300px 100px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+    <div class="w3-container w3-teal">
+        <h1>My Car</h1>
+    </div>
+    <div id="myDIV"> km6uii</div>
+    <h2>background-size: 300px 100px:</h2>
+    <div id="example2">
+        <h2>Hello World</h2>
+        <p>Here, the background image is set to 300px wide and 100px high.</p>
+    </div>
+    <!--<p><strong>Note:</strong> The background-size property is not supported in Internet Explorer 8 and earlier versions.</p>-->
+    <div class="container">
+        <h2>Button Styles</h2>
+        <button type="button" class="btn">Basic</button>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-dark">Dark</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-link">Link</button>
+    </div>
+
+</body>
+</html>
