@@ -1,0 +1,208 @@
+﻿    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+
+        <fieldset style="width: 300px">
+            <legend>phones</legend>
+
+
+            <label>model: </label>
+            <input type="hidden" id="txtmodel" /><br /><br />
+            <label>company: </label>
+            <input type="text" id="txtcompany" /><br /><br />
+            <label>price: </label>
+            <input type="text" id="txtprice" /><br /><br />
+            <label>GB: </label>
+            <input type="text" id="txtGB" /><br /><br />
+            <label>type: </label>
+            <input type="text" id="txttype" /><br /><br />
+            <input type="button" value="Save" onclick="Save()" />
+        </fieldset>
+
+        <br /><br />
+        <div id="divfhone"></div>
+
+        <div id="divDetails" style="visibility:hidden">
+            <dl id="dldetails">
+                <dt>model:</dt>
+                <dd id="ddmodel"></dd>
+                <dt>company:</dt>
+                <dd id="ddcompany"></dd>
+                <dt>price:</dt>
+                <dd id="ddprice"></dd>
+                <dt>GB:</dt>
+                <dd id="ddGB"></dd>
+                <dt>type:</dt>
+                <dd id="ddtype"></dd>
+            </dl>
+            <img id="img1" width="200" />
+        </div>
+        <script>
+            var auotoId = 0;
+            var phone = [
+                { model: ++auotoId, company: "samsung", price: "3500", GB: "8GB", type: "smartfhone", pic: "pictf/pic1.jpg" },
+                { model: ++auotoId, company: "apple", price: "3500", GB: "8GB", type: "smartfhone", pic: "pictf/pic7.jpg" },
+                { model: ++auotoId, company: "samsung", price: "3500", GB: "8GB", type: "smartfhone", pic: "pictf/pic17.jpg" },
+                { model: ++auotoId, company: "Nokia", price: "200", GB: "4GB", type: "kosher", pic: "pictf/pic10.jpg" },
+                { model: ++auotoId, company: "Nokia", price: "450", GB: "4GB", type: "kosher", pic: "pictf/pic2.jpg" },
+                { model: ++auotoId, company: "Shioumy", price: "2500", GB: "8GB", type: "smartfhone", pic: "pictf/pic5.jpg" },
+                { model: ++auotoId, company: "apple", price: "3500", GB: "16GB", type: "smartfhone", pic: "pictf/pic18.jpg" },
+                { model: ++auotoId, company: "samsung", price: "500", GB: "8GB", type: "safe", pic: "pictf/pic12.jpg" },
+                { model: ++auotoId, company: "samsung", price: "1500", GB: "8GB", type: "smartfhone", pic: "pictf/pic8.jpg" },
+                { model: ++auotoId, company: "samsung", price: "3500", GB: "16GB", type: "smartfhone", pic: "pictf/pic4.jpg" },
+                { model: ++auotoId, company: "Nokia", price: "250", GB: "4GB", type: "kosher", pic: "pictf/pic3.jpg" },
+                { model: ++auotoId, company: "samsung", price: "150", GB: "4GB", type: "kosher", pic: "pictf/pic11.jpg" },
+                { model: ++auotoId, company: "samsung", price: "120", GB: "4GB", type: "kosher", pic: "pictf/pic13.jpg" }
+            ];
+            fhones();
+            function fhones() {
+                var tbl, row, pic, col;
+                divfhone.innerHTML = "";
+                tbl = document.createElement("table");
+                tbl.setAttribute("border", 0);
+                tbl.setAttribute("cellpadding", 10);
+                row = document.createElement("tr");
+                for (var field in phone[0]) {
+                    if (field != "type" && field != "pic") {
+                        col = document.createElement("th");
+                        col.innerHTML = field;
+                        row.appendChild(col);
+                    }
+                }
+                tbl.appendChild(row);
+                for (var i = 0; i < phone.length; i++) {
+                    row = document.createElement("tr");
+                    for (var field in phone[i]) {
+                        if (field != "type" && field != "pic") {
+                            col = document.createElement("td");
+                            col.innerHTML = phone[i][field];
+                            row.appendChild(col);
+                        }
+                    }
+
+                    col = document.createElement("td");
+                    col.innerHTML = "<a href='#' onclick='deleteItem(" + phone[i].model + ")'>delete</a>";
+                    row.appendChild(col);
+                    col = document.createElement("td");
+                    col.innerHTML = "|";
+                    row.appendChild(col);
+                    col = document.createElement("td");
+                    col.innerHTML = "<a href='#' onclick='editItem(" + phone[i].model + ")'>edit</a>";
+                    row.appendChild(col);
+                    col = document.createElement("td");
+                    col.innerHTML = "|";
+                    row.appendChild(col);
+                    col = document.createElement("td");
+                    col.innerHTML = "<a href='#' onclick='detailsItem(" + phone[i].model + ")'>details</a>";
+                    row.appendChild(col);
+                    tbl.appendChild(row);
+                }
+                divfhone.appendChild(tbl);
+            }
+
+            function Save() {
+
+                if (txtmodel.value == null || txtmodel.value == "") {
+                    //יצירת אובייקט חדש
+                    var newAnim = {};
+                    //השמת התוכן של תיבות הקלט בשדות האובייקט
+                    newAnim.model = ++auotoId;
+                    newAnim.company = txtcompany.value;
+                    newAnim.price = txtprice.value;
+                    newAnim.GB = txtGB.value;
+                    newAnim.type = txttype.value;
+                    phone.push(newAnim);
+                }
+                //אם יש תוכן בפקד של הקוד, מעדכן את האיבר ברשימה
+                else {
+                    //מחפש לפי הקוד ששמור בתיבת הטקסט את האיבר המתאים ברשימה
+                    //אותו יש לעדכן לפי תיבות הטקסט
+                    for (var i = 0; i < phone.length; i++) {
+                        //מעדכן את האיבר המתאים לפי תיבות הטקסט
+                        if (phone[i].model == txtmodel.value) {
+                            phone[i].company = txtcompany.value;
+                            phone[i].price = txtprice.value;
+                            phone[i].GB = txtGB.value;
+                            phone[i].type = txttype.value;
+                            break;
+                        }
+                    }
+                }
+                //יוצר מחדש את טבלת התצוגה של המערך
+                fhones();
+                //הסרת התוכן של תיבות הקלט שיהיה מוכן לקלט הבא
+                clearInputs();
+            }
+
+            function clearInputs() {
+                txtmodel.value = "";
+                txtcompany.value = "";
+                txtprice.value = "";
+                txtGB.value = "";
+                txttype.value = "";
+            }
+
+            function deleteItem(model) {
+                for (var i = 0; i < phone.length; i++) {
+                    if (phone[i].model == model) {
+                        phone.splice(i, 1);
+                        break;
+                    }
+                }
+                fhones();
+            }
+
+            function editItem(model) {
+                for (var i = 0; i < phone.length; i++) {
+                    if (phone[i].model == model) {
+                        txtmodel.value = phone[i].model;
+                        txtcompany.value = phone[i].company;
+                        txtprice.value = phone[i].price;
+                        txtGB.value = phone[i].GB;
+                        txttype.value = phone[i].type;
+                        break;
+                    }
+                }
+            }
+
+            function detailsItem(model) {
+                for (var i = 0; i < phone.length; i++) {
+                    if (phone[i].model == model) {
+
+                        ddmodel.innerHTML = phone[i].model;
+                        ddcompany.innerHTML = phone[i].company;
+                        ddprice.innerHTML = phone[i].price;
+                        ddGB.innerHTML = phone[i].GB;
+                        ddtype.innerHTML = phone[i].type;
+                        img1.src = phone[i].pic;
+                        divDetails.style.visibility = "visible";
+                        break;
+                    }
+                }
+            }
+
+            storage();
+            function storage() {
+                var sess1, sess2, sess3;
+                if (sessionStorage.getItem("BackColor") != null) {
+                    sess1 = sessionStorage.getItem("BackColor");
+                    document.body.style.backgroundColor = sess1;
+                }
+                if (sessionStorage.getItem("FontColor") != null) {
+                    sess2 = sessionStorage.getItem("FontColor");
+                    document.body.style.color = sess2;
+                }
+
+                if (sessionStorage.getItem("size") != null) {
+                    sess3 = sessionStorage.getItem("size");
+                    document.body.style.fontSize = sess3;
+                }
+            }
+
+        </script>
+    </body>
+</html>
