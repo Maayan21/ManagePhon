@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Sum payment </h1>
+    <label id="lblSum" style="font-size:x-large"></label>
+    <div class="container">
+        <div class="row">
+            <form class="col-sm-4">
+                <h3>BILLING DETAILS:</h3>
+                <div class="form-group">
+                    <label for="usr">First name:</label>
+                    <input type="text" id="txtName" onkeypress="isLetter()" class="form-control" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="lst">Last name:</label>
+                    <input type="text" class="form-control" onkeypress="isLetter()" id="lst" name="lastname">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                </div>
+                <!--<div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>-->
+               
+                <div class="form-group">
+                    <label for="Country">Country:</label><br />
+                    <input type="text" list="Country"class="form-control" />
+                    <datalist id="Country" >
+                        <option value="Israel"></option>
+                        <option value="USA"></option>
+                        <option value="Italy"></option>
+                        <option value="Ivory Coast"></option>
+                        <option value="Japan"></option>
+                        <option value="Mexico"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="Street address ">Street address:</label><br />
+                    <input type="text" class="form-control" id="Address" placeholder="House number and street name" name="Address"><br />
+                    <input type="text" class="form-control" id="Address" placeholder="Apartment,suite,unit etc.(optional)" name="Address">
+                </div>
+
+            </form>
+
+
+            <div class="col-sm-4">
+                <h3>CREDITCARD DETAILS:</h3>
+                <label for="id">Id:</label>
+                <input type="text" class="form-control" id="tz" onblur="checkTz()" onkeypress="isDigit()" name="id">
+                <label id="lblErrTz" style="color:red; visibility: hidden">Invalid length</label><br />
+                <label>Number creditcard:</label>
+                <input type="text" id="txt3" onkeypress="isDigit()" class="form-control" />
+                <label>Last 3 digits:</label>
+                <input type="text" id="txt4" onkeypress="isDigit()" class="form-control" />
+                <label>Expiry date:</label>
+                <input type="date" id="txt5" class="form-control" /><br /><br />
+            </div>
+        </div>
+        <input type="button" value="confirm" onclick="checkAll()" />
+    </div>
+    <script>
+
+        function getSumPay() {
+            var sum = 0;
+            if (sessionStorage.getItem("pay") != null) {
+                sum = sessionStorage.getItem("pay");
+                lblSum.innerHTML = sum;
+            }
+        }
+        getSumPay();
+        function checkTz() {
+            if (tz.value.length != 9) {
+                tz.focus();
+                lblErrTz.style.visibility = "visible";
+                tz.style.borderColor = "red";
+            }
+            else {
+                lblErrTz.style.visibility = "hidden";
+                tz.style.borderColor = "gray";
+            }
+        }
+        function isDigit() {
+            if (event.keyCode < 48 || event.keyCode > 57) {
+                event.preventDefault();
+                event.keyCode = 0;
+            }
+        }
+        function isLetter() {
+            if (event.keyCode < 97 || event.keyCode > 128) {
+                event.preventDefault();
+                event.keyCode = 0;
+            }
+        }
+        function checkAll() {
+            var isValid = true;
+            if (tz.value == "" || tz.value == null) {
+                tz.style.borderColor = "red";
+                tz.placeholder = "Required field";
+                isValid = false;
+            }
+            else {
+                tz.style.borderColor = "gray";
+            }
+            if (txtName.value == "" || txtName.value == null) {
+                txtName.style.borderColor = "red";
+                txtName.placeholder = "Required field";
+                isValid = false;
+            }
+            else {
+                txtName.style.borderColor = "gray";
+            }
+            if (txt3.value == "" || txt3.value == null) {
+                txt3.style.borderColor = "red";
+                txt3.placeholder = "Required field";
+                isValid = false;
+            }
+            else
+                txt3.style.borderColor = "gray";
+            if (txt4.value == "" || txt4.value == null) {
+                txt4.style.borderColor = "red";
+                txt4.placeholder = "Required field";
+                isValid = false;
+            }
+            else
+                txt4.style.borderColor = "gray";
+            if (lst.value == "" || lst.value == null) {
+                lst.style.borderColor = "red";
+                lst.placeholder = "Required field";
+                isValid = false;
+            }
+            else {
+                lst.style.borderColor = "gray";
+            }
+            //if (isValid == true)
+            //    alert("כל השדות תקינים")
+        }
+
+    </script>
+</body>
+</html>
