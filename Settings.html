@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <label>choose background color:</label>
+    <input type="color" id="backcolor" />
+    <br /><br />
+    <label>choose fontcolor:</label>
+    <input type="color" id="fcolor" />
+    <br /><br />
+    <label>choose fontsize:</label>
+    <select id="fsize">
+        <option> small</option>
+        <option> medium</option>
+        <option> large</option>
+    </select>
+    <br /><br />
+    <label>choose backgrountimage:</label><br /><br />
+    <input type="file" id="file1" onchange="readFile(event) " />
+    <section id="sec1"></section>
+    <input type="button" value="save" onclick="saveData()" />
+    <br /><br />
+
+    <script>
+
+        function readFile(e) {
+            var files = e.target.files;
+            var file = files[0];
+            var reader = new FileReader();
+            if (file.type.match("text*")) {
+                alert("ניתן לבחור תמונה בלבד");
+            }
+            if (file.type.match("image*")) {
+                reader.onload = function (e) {
+                    document.body.src= " url('" + e.target.result + "')";
+                    
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+
+
+        function saveData() {
+            sessionStorage.setItem("BackColor", backcolor.value);
+            sessionStorage.setItem("FontColor", fcolor.value);
+            sessionStorage.setItem("size", fsize.value);
+            window.location = "Settings.html";
+        }
+
+        storage();
+
+        function storage() {
+            var sess1, sess2, sess3;
+            if (sessionStorage.getItem("BackColor") != null) {
+                sess1 = sessionStorage.getItem("BackColor");
+                document.body.style.backgroundColor = sess1;
+            }
+            if (sessionStorage.getItem("FontColor") != null) {
+                sess2 = sessionStorage.getItem("FontColor");
+                document.body.style.color = sess2;
+            }
+
+            if (sessionStorage.getItem("size") != null) {
+                sess3 = sessionStorage.getItem("size");
+                document.body.style.fontSize = sess3;
+            }
+        }
+
+    </script>
+
+
+
+</body>
+</html>
