@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="divData1"></div>
+    <input type="button" value="To edit the account" onclick="finishBuy()"/>
+
+    <script>
+
+        myBug = [];
+        tempBug = [];
+    
+        loadBug();
+        function loadBug() {
+            if (sessionStorage.getItem("bug")) {
+                tempBug = sessionStorage.getItem("bug").split("$");
+                for (var i = 0; i < tempBug.length-1; i++) {
+                    myBug.push(JSON.parse(tempBug[i]));
+                    
+                }
+                showBag();
+            }
+        }
+
+        function showBag() {
+            var tbl, col, row, pic;
+            divData1.innerHTML = "";
+            tbl = document.createElement("table");
+            tbl.setAttribute("border", 0);
+            tbl.setAttribute("cellpadding", 10);
+
+            row = document.createElement("tr");
+
+            for (var field in myBug[0]) {
+                if (field != "pic") {
+                    col = document.createElement("th");
+                    col.innerHTML = field;
+                    row.appendChild(col);
+                }
+            }
+
+
+            tbl.appendChild(row);
+
+            for (var i = 0; i < myBug.length; i++) {
+                row = document.createElement("tr");
+                for (var field in myBug[i]) {
+                    if (field != "pic") {
+                        col = document.createElement("td");
+                        col.innerHTML = myBug[i][field];
+                        row.appendChild(col);
+                        col = document.createElement("td");
+                    }
+                }
+                col = document.createElement("input");
+                col.setAttribute("type", "button");
+                col.setAttribute("value", "remove item")
+                col.setAttribute("onclick", "remove(" + myBug[i].model + ")");
+                row.appendChild(col);
+
+                tbl.appendChild(row);
+            }
+            divData1.appendChild(tbl);
+        }
+
+
+        function remove(model) {
+            var flag = 0;
+            for (var i = 0; i < myBug.length && flag == 0; i++) {
+                if (myBug[i].model == model)
+                    if (myBug[i].amount == 1) {
+                        myBug.splice(i, 1);
+                        flag = 1;
+                        showBag();
+                    }
+                    else
+                        myBug[i].amount--;
+            }
+
+            showBag();
+        }
+
+        function finishBuy() {
+            var sum = 0;
+            for (var i = 0; i < myBug.length; i++) {
+                sum += parseInt(myBug[i].sumPrice);
+            }
+            if (sum == 0)
+                alert("no item");
+            else {
+                sessionStorage.setItem("pay", sum);
+                window.location = "Finish.html"
+            }
+        }
+  
+    </script>
+
+</body>
+</html>
